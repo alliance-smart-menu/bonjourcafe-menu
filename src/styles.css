@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@200;400;700;900&display=swap');
+
+:root {
+    --color_first: #EBDDAB;
+    --color_second: #587267;
+}
+
+html, body { 
+    margin: 0;
+    padding: 0;
+    background-color: var(--color_second);
+    color: white;
+    font-family: 'Source Serif Pro', serif;
+}
+
+a {
+    cursor: pointer;
+    color: white;
+    text-decoration-line: none;
+}
+
+a:hover {
+    color: var(--color_first)
+}
+
+.router-link-active {
+    color: var(--color_first);
+}
+

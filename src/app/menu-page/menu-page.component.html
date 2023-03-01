@@ -1,0 +1,47 @@
+<section>
+    <header>
+        <ng-container *ngIf="menuService.categories && menuService.category">
+            <span *ngFor="let category of menuService.categories" 
+            (click)="changeCategory(category._id)"
+            class="category-container"
+            >
+                <img [src]="category.image" class="category-icon" [alt]="category.name[menuService.language]">
+                <b [ngClass]="setCategoryClass(category)">{{category.name[menuService.language]}}</b>
+            </span>
+        </ng-container>
+
+    </header>
+    <aside>
+        <ng-container *ngIf="menuService.positions && !menuService.loading">
+            <div *ngFor="let position of menuService.positions" class="position-container">
+                <span class="title-container">
+                    <h1>{{position.name[menuService.language]}}</h1>
+                </span>
+                <span *ngIf="position.options" class="options-container">
+                    <span *ngFor="let option of position.options; let i = index" 
+                    [ngClass]="setOptionClass(option)"
+                    (click)="changeOption(position, i)"
+                    >
+                        <b>{{option.name[menuService.language]}}</b>
+                    </span>
+                </span>
+                <span *ngIf="position.total_price" class="price-container">
+                    <h1 class="price">{{position.total_price}}</h1>
+                    <h1 class="price">MDL</h1>
+                    <img (click)="notesService.notesAdd(position)" src="../../assets/img/icon-add.svg" alt="Add" class="add-icon">
+                </span>
+                <span *ngIf="position.description" class="about-container">
+                    <p>{{position.description[menuService.language]}}</p>
+                </span>
+            </div>
+        </ng-container>
+        <div *ngIf="menuService.loading" class="loading">
+            <loader></loader>
+        </div>
+        <div *ngIf="!menuService.loading && menuService.positions?.length == 0" class="loading">
+            <h3>{{html.no_positions[menuService.language]}}</h3>
+        </div>
+    </aside>
+
+       
+</section>

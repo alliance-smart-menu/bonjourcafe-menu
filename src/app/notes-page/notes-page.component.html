@@ -1,0 +1,28 @@
+<section>
+    <h1 *ngIf="notesService.notes.length == 0">{{html.add_note[menuService.language]}}!</h1>
+    <h1 *ngIf="notesService.notes.length > 0">{{html.note[menuService.language]}}:</h1>
+    <div *ngFor="let position of notesService.notes; let i = index" class="position">
+        <span class="title">
+            <h3>{{position.name[menuService.language]}}</h3>
+            <span *ngIf="position.option.name" class="option selected">
+                <b>{{position.option.name[menuService.language]}}</b>
+            </span>
+        </span>
+        <span class="price">
+            <span class="quantity-container">
+                <mat-icon class="quantity-controller" (click)="notesService.minusQuantity(position, i)">remove_circle_outline</mat-icon>
+                <!-- <b>-</b> -->
+                <h3 class="position-quantity">{{position.quantity}}</h3>
+                <mat-icon class="quantity-controller" (click)="notesService.plusQuantity(position)">add_circle_outline</mat-icon>
+                <!-- <b>+</b> -->
+            </span>
+            <h3 >{{position.total_price}} MDL</h3>
+        </span>
+    </div>
+    <div *ngIf="notesService.notes.length > 0" class="total-price-container">
+        <h3 class="total">{{html.total[menuService.language]}}: {{notesService.total_price}} MDL</h3>
+    </div>
+    <div *ngIf="notesService.notes.length > 0" class="button-container">
+        <button mat-raised-button color="warn" class="clear-button" (click)="notesService.clear()">{{html.clear[menuService.language]}}</button>
+    </div>
+</section>
